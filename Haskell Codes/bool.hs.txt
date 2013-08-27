@@ -1,0 +1,30 @@
+data Bool' = 	True'
+		|False'
+
+nott::Bool'->Bool'	
+nott False'=True'
+nott True'=False'
+
+(!^)::Bool'->Bool'->Bool'
+False' !^ x = False'
+True' !^ x = x
+
+(|^)::Bool'->Bool'->Bool'
+False' |^ x = x
+True' |^ x = True'
+
+instance Show Bool'
+		where
+		show True'="True"
+		show False'="False"
+
+class Eq' a
+	where
+	eqeq :: a->a->Bool'
+	(|=) :: a->a->Bool'
+
+	x|=y = nott (eqeq x y)
+
+instance Eq' Bool'
+		where
+		eqeq x y = ((x !^ y) |^ ((nott x) !^ (nott y)))

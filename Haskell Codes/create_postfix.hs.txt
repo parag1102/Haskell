@@ -1,0 +1,19 @@
+postfix :: [Char]->[Char]
+
+postfix str = post' str [] []
+	where
+	post' [] ls ms = (ls++ms)
+	post' (x:xs) ls ms | ( x=='(' ) = post' xs ls ms
+			   | ( x=='0'||x=='1'||x=='2'||x=='3'||x=='4'||x=='5'||x=='6'||x=='7'||x=='8'||x=='9' ) = post' xs (ls++[x]) ms
+				   
+			   | ( x=='*'||x=='+'||x=='-'||x=='/' ) = post' xs ls (x:ms)
+			   | ( x==')' ) = post' xs (ls++[head ms]) (drop 1 ms) 
+
+
+{---------------------------------------  --NOTE--  ---------------------------------------
+
+Problem occurs when we have numbers with multiple digits like 25,345 etc.
+Then how to distinguish between 25 and individual numbers 2 and 5
+
+
+------------------------------------------------------------------------------------------}

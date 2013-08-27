@@ -1,0 +1,11 @@
+foldl' :: (a->b->a)->a->[b]->a
+foldl' f e [] = e
+foldl' f e ls = f (foldl' f e (reverse'(tail(reverse' ls)))) z 
+					where z = head'(reverse' ls)
+reverse' [] = []
+reverse' (x:xs) = reverse' (xs)++[x]
+				 	
+head' (x:xs)=x
+
+sum = foldl' (+) 0
+mult = foldl' (*) 1

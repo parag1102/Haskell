@@ -1,0 +1,8 @@
+data Date  = 	Date Int Int Int
+		deriving Show
+
+{-----------------------------------------Note:--------------------------------------------
+These two 'Dates' are different
+The 'Date' to the left of '=' is a Type Constructor
+The 'Date' to the right of '=' is a Data Constructor
+------------------------------------------------------------------------------------------}

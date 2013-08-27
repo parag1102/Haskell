@@ -1,0 +1,33 @@
+tokenized :: [Char] -> [[Char]]
+
+tokenized [] = []
+tokenized (x:xs) = token' (x:xs) []
+			where 
+			token' [] l = [l]
+			token' (x:xs) l | x/=' ' = token' xs (l++[x])
+					| x==' ' = l:(tokenized xs)
+
+eval :: [[Char]]->[Int]
+
+eval [] = []
+eval (x:xs) = func (x:xs) []
+			where 
+			func [] l = l
+			func (x:xs) l 	| ((x/="*") && (x/="+") && (x/="/")) = func xs  ((read x::Int):l) 
+					| x=="*" = [(head (tail l))*(head l)]++(drop 3 l)
+					| x=="+" = [(head (tail l))+(head l)]++(drop 3 l)
+					| x=="-" = [(head (tail l))-(head l)]++(drop 3 l)
+					| x=="/" = [(head (tail l))`div`(head l)]++(drop 3 l)
+
+
+{-------------------------------------  --NOTE--  -----------------------------------------
+
+Eg: How to check the output
+
+eval (tokenized "30 2 3 + 5 * -")
+
+Another Eg:
+eval (tokenized "23 58 *")
+
+
+------------------------------------------------------------------------------------------}

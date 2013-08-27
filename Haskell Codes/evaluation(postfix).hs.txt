@@ -1,0 +1,47 @@
+-- postfix converts the input string to postfix notation
+postfix :: [Char]->[Char]
+postfix str = post' str [] []
+		where
+		post' [] ls ms = (ls++ms)
+		post' (x:xs) ls ms | ( x=='(' ) = post' xs ls ms
+				   | ( x=='0'||x=='1'||x=='2'||x=='3'||x=='4'||x=='5'||x=='6'||x=='7'||x=='8'||x=='9' ) = post' xs (ls++[x]++" ") ms
+				   
+				   | ( x=='*'||x=='+'||x=='-' ) = post' xs ls (x:ms)
+				   | ( x==')' ) = post' xs (ls++[head ms]++" ") (drop 1 ms)
+
+
+{-----------------------------------------------------------------------------------------}
+-- tokenized makes tokens out of the postfix notaion of the input string
+tokenized :: [Char] -> [[Char]]
+tokenized [] = []
+tokenized (x:xs) = token' (x:xs) []
+			where 
+			token' [] l = [l]
+			token' (x:xs) l | x/=' ' = token' xs (l++[x])
+					| x==' ' = l:(tokenized xs)
+
+{-----------------------------------------------------------------------------------------}
+-- evaluates the tokenized string
+eval :: [[Char]]->[Int]
+eval [] = []
+eval (x:xs) = func (x:xs) []
+			where 
+			func [] l = l
+			func (x:xs) l 	| ((x/="*") && (x/="+") && (x/="/")) = func xs  ((read x::Int):l) 
+					| x=="*" = [(head (tail l))*(head l)]++(drop 3 l)
+					| x=="+" = [(head (tail l))+(head l)]++(drop 3 l)
+					| x=="-" = [(head (tail l))-(head l)]++(drop 3 l)
+					| x=="/" = [(head (tail l))`div`(head l)]++(drop 3 l)
+
+
+{------------------------------------- -- NOTE -- -----------------------------------------
+
+Eg: How to check the output
+
+eval (tokenized ( postfix "((2+3)*5)-3" ))
+
+Another Eg:
+eval (tokenized ( postfix "2*8" ))
+
+
+------------------------------------------------------------------------------------------} 

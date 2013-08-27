@@ -1,0 +1,5 @@
+take':: Integer->[a]->[a]
+
+take' (n+1) [] = []
+take' 0 l = []
+take' (n+1) (x:xs) = x:(take' n xs)

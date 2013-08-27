@@ -1,0 +1,9 @@
+foldl'::(Bool->Bool->Bool)->Bool->[Bool]->Bool
+foldl' f e [] = e
+foldl' f e (x:xs) = foldl f (f e x) xs
+
+ls x l= [(x==y)| y<-l]
+
+iselem x ls = foldl' (||) False ls
+
+		

@@ -1,0 +1,5 @@
+rmdup [] = []
+rmdup (x:xs) = x:(rmdup (f x xs))
+		where 	f v [] 		= []
+			f v (y:ys) 	| (v==y) 	= f v ys
+					| otherwise 	= y:(f v ys) 

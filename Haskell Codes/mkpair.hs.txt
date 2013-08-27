@@ -1,0 +1,11 @@
+data Pair a b = MkPair a b
+
+--MkPair::a -> b -> Pair a b
+
+class Eq' a
+	where
+	eqeq::a->a->Bool
+
+instance Eq' Pair a b
+		where 
+		eqeq (MkPair a b) (MkPair c d) = (eqeq a c) && (eqeq b d) 

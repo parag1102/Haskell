@@ -1,0 +1,5 @@
+tokenized (x:xs) = token' (x:xs) []
+			where 
+			token' [] l = [l]
+			token' (x:xs) l | x/=' ' = token' xs (l++[x])
+					| x==' ' = l:(tokenized xs)
