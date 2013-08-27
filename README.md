@@ -1,4 +1,4 @@
 Haskell
 =======
 
-    Some Interesting problems solved in Prolog. Enjoy !
+    Some Interesting problems solved in Haskell. Enjoy !
